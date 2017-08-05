@@ -95,6 +95,9 @@ module.exports = {
 
         // Instead of loudly failing on JS errors (the default), ignore them.
         ignoreJSErrors: true,
+        
+        // Path of index file. By default it's index.html in static root.
+        indexPath: path.resolve('/dist/path/to/index.html'),
 
         // Because PhantomJS occasionally runs into an intermittent issue,
         // we will retry a page capture up to 10 times by default. You may
@@ -117,7 +120,13 @@ module.exports = {
         phantomPageSettings: {
           loadImages: true
         },
-
+        
+        // http://phantomjs.org/api/webpage/property/viewport-size.html
+        phantomPageViewportSize: {
+          width: 1280,
+          height: 800
+        },
+        
         // Manually transform the HTML for each page after prerendering,
         // for example to set the page title and metadata in edge cases
         // where you cannot handle this via your routing solution.
@@ -155,7 +164,7 @@ If you're using `html-webpack-plugin`, you can resolve this by also injecting yo
 ```js
 new HtmlWebpackPlugin({
   // ... your other options ...
-  // Ensure asynchronous chucnks are injected into <head>
+  // Ensure asynchronous chunks are injected into <head>
   inject: 'head',
   // Ensure chunks are evaluated in correct order
   chunksSortMode: 'dependency'
